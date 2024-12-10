@@ -150,7 +150,7 @@ class PicoApp(object):
     def function_definition(self, func, pico_url='/'):
         annotations = dict(func._annotations)
         request_args = set(annotations.pop('request_args', []))
-        a = inspect.getargspec(func)
+        a = inspect.getfullargspec(func)
         args = []
         for i, arg_name in enumerate(a.args):
             if arg_name and arg_name != 'self' and arg_name not in request_args:
@@ -165,7 +165,7 @@ class PicoApp(object):
             url=self.func_url(func, pico_url),
             args=args,
         )
-        if a.keywords is not None:
+        if a.varkw is not None:
             d['accept_extra_args'] = True
         d.update(annotations)
         return d

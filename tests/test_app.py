@@ -5,7 +5,7 @@ import unittest
 from io import BytesIO
 
 from werkzeug.test import Client
-from werkzeug.wrappers import BaseResponse
+from werkzeug.wrappers import Response
 
 import testapp
 
@@ -13,7 +13,7 @@ import testapp
 class TestApp(unittest.TestCase):
 
     def setUp(self):
-        self.client = Client(testapp.app, BaseResponse)
+        self.client = Client(testapp.app, Response)
 
     def test_hello_get(self):
         r = self.client.get('/testapp/hello/?who=Tester')
